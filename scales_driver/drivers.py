@@ -4,7 +4,7 @@ from typing import Optional, Union
 
 from serial import Serial, SerialException
 
-from exceptions import ScalesException, SerialError
+from .exceptions import ScalesException, SerialError
 
 
 class Generic:

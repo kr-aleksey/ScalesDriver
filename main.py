@@ -1,8 +1,8 @@
 import logging
 import time
 
-from drivers import Generic, CASType6
-from exceptions import ScalesException, SerialError
+from scales_driver.drivers import CASType6, Generic
+from scales_driver.exceptions import SerialError, ScalesException
 
 # Serial params
 PORT = 'com6'
@@ -54,8 +54,8 @@ def main():
             scales.update()
             data = scales.get_weight(unit=Generic.GR, decimal_places=1)
             status = STATUS.get(scales.get_status())
-            print('\r', end='')
-            print(data, Generic.GR, status, end='')
+            print(' ' * 20, '\r', end='')
+            print(data, Generic.GR, status, end='', flush=True)
             time.sleep(RETRY_TIME)
         except ScalesException as error:
             pass
