@@ -168,19 +168,16 @@ class CASType6(Generic):
 
     def update(self) -> None:
         """Update data from scales."""
-        try:
-            logging.debug('Reading data from the scales')
-            response: bytes = self.read_data()
-            logging.debug('Checking the correctness of the scales response')
-            self.check_response(response)
-            logging.debug('Parsing the scales status')
-            self.status: int = self.parse_status(response)
-            logging.debug('Parsing the weight value')
-            self.weight: Decimal = self.parse_value(response)
-            logging.debug('Parsing the weight unit')
-            self.unit: str = self.parse_unit(response)
-        except Exception as Error:
-            raise Error
+        logging.debug('Reading data from the scales')
+        response: bytes = self.read_data()
+        logging.debug('Checking the correctness of the scales response')
+        self.check_response(response)
+        logging.debug('Parsing the scales status')
+        self.status: int = self.parse_status(response)
+        logging.debug('Parsing the weight value')
+        self.weight: Decimal = self.parse_value(response)
+        logging.debug('Parsing the weight unit')
+        self.unit: str = self.parse_unit(response)
 
     @staticmethod
     def bcc(data: Union[list[int], bytes]) -> int:
